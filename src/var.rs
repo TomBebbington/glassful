@@ -13,10 +13,10 @@ pub fn translate(sess: &ParseSess,
 
     for attr in attrs.iter() {
         let name = attr.name();
-        match name.get() {
+        match &*name {
             // many others: https://www.opengl.org/wiki/Type_Qualifier_%28GLSL%29
             "varying" | "attribute" | "uniform" => {
-                write!(out, "{} ", name.get()).unwrap();
+                write!(out, "{} ", name).unwrap();
             }
             _ => diag.span_err(attr.span, "unknown variable attribute"),
         }
